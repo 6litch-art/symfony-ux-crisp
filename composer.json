@@ -1,22 +1,14 @@
 {
     "name": "xkzl/ux-crisp",
     "type": "symfony-bundle",
-    "description": "Chart.js integration for Symfony",
-    "keywords": ["symfony", "ux", "chart", "chart.js", "crisp"],
+    "description": "Crisp integration for Symfony",
+    "keywords": ["symfony", "ux", "crisp"],
     "homepage": "https://symfony.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Marco Meyer",
             "email": "marco.meyerconde@gmail.com"
-        },
-        {
-            "name": "Titouan Galopin",
-            "email": "galopintitouan@gmail.com"
-        },
-        {
-            "name": "Symfony Community",
-            "homepage": "https://symfony.com/contributors"
         }
     ],
     "autoload": {
