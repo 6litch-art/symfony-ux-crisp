@@ -7,20 +7,13 @@
 
         <defaults public="false" />
 
-        <!-- Controller declarations -->
-        <service id="chartjs.controller" class="Symfony\UX\Chartjs\Controller\ChartjsController" public="true">
-            <call method="setContainer"><argument type="service" id="service_container" /></call>
-            <tag name="controller.service_arguments" />
-        </service>
-
         <!-- Twig extension declarations -->
-        <service id="chartjs.twig_extension" class="Symfony\UX\Chartjs\Twig\ChartjsTwigExtension">
-            <argument type="service" id="parameter_bag" />
+        <service id="crisp.twig_extension" class="Symfony\UX\Crisp\Twig\CrispTwigExtension">
             <tag name="twig.extension" />
         </service>
 
         <!-- Litener declarations -->
-        <service id="chartjs.listener" class="Symfony\UX\Chartjs\Subscriber\ChartjsListener">
+        <service id="crisp.listener" class="Symfony\UX\Crisp\Subscriber\CrispListener">
             <tag name="kernel.event_listener" event="kernel.request"  method="onKernelRequest" />
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
             <argument type="service" id="parameter_bag" />
