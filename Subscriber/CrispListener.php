@@ -23,8 +23,9 @@ class CrispListener
         $this->twig         = $twig;
         $this->requestStack = $requestStack;
 
+        $this->enable = $parameterBag->get("crisp.enable");
         $this->autoAppend = $parameterBag->get("crisp.autoappend");
-        $this->javascript = $parameterBag->get("crisp.website_id");
+        $this->websiteId = $parameterBag->get("crisp.website_id");
     }
 
     private function allowRender(ResponseEvent $event)
@@ -34,7 +35,7 @@ class CrispListener
         if (!$this->autoAppend)
             return false;
         
-        $contentType = $event->getResponse()->headers->get('content-type');
+            $contentType = $event->getResponse()->headers->get('content-type');
         if ($contentType && !str_contains($contentType, "text/html"))
             return false;
     
@@ -49,20 +50,21 @@ class CrispListener
         if (!$this->enable) return;
         if (!$this->websiteId) return;
 
-        $locale = $event->getRequest()->getLocale();
-        $javascript = '<script type="text/javascript">'.PHP_EOL.
-                           'window.$crisp = [];'.PHP_EOL.
-                           'window.CRISP_RUNTIME_CONFIG = {locale : "'.$locale.'"};'.PHP_EOL.
-                           'window.CRISP_WEBSITE_ID = "'.$this->websiteId.'";'.PHP_EOL.
-                           '(function () {'.PHP_EOL.
-                               'd = document;'.PHP_EOL.
-                               's = d.createElement("script");'.PHP_EOL.
-                               's.src = "https://client.crisp.chat/l.js";'.PHP_EOL.
-                               's.async = 1;'.PHP_EOL.
-                               'd.getElementsByTagName("head")[0].appendChild(s);'.PHP_EOL.
-                           '})();'.PHP_EOL.
+        $locale = substr($event->getRequest()->getLocale(),0,2);
+        $javascript = '<script type="text/javascript">'.
+                           'window.$crisp = [];'.
+                           'window.CRISP_RUNTIME_CONFIG = {locale : "'.$locale.'"};'.
+                           'window.CRISP_WEBSITE_ID = "'.$this->websiteId.'";'.
+                           '(function () {'.
+                               'd = document;'.
+                               's = d.createElement("script");'.
+                               's.src = "https://client.crisp.chat/l.js";'.
+                               's.async = 1;'.
+                               'd.getElementsByTagName("head")[0].appendChild(s);'.
+                           '})();'.
                        '</script>';
 
+        dump($javascript);
         $this->twig->addGlobal("crisp", $this->twig->getGlobals()["crisp"] ?? "" . $javascript);
     }
 

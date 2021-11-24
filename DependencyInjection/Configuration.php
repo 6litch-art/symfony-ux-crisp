@@ -29,6 +29,10 @@ class Configuration implements ConfigurationInterface
     {
         $rootNode
             ->children()
+                ->booleanNode('enable')
+                    ->info('Enable feature')
+                    ->defaultValue(True)
+                    ->end()
                 ->booleanNode('autoappend')
                     ->info('Auto-append required dependencies into HTML page')
                     ->defaultValue(True)
