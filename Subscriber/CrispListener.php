@@ -64,7 +64,6 @@ class CrispListener
                            '})();'.
                        '</script>';
 
-        dump($javascript);
         $this->twig->addGlobal("crisp", $this->twig->getGlobals()["crisp"] ?? "" . $javascript);
     }
 
