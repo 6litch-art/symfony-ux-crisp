@@ -45,24 +45,31 @@ class CrispListener
         return true;
     }
 
+    public function getAsset(string $url): string
+    {
+        $url = trim($url);
+        $parseUrl = parse_url($url);
+        if($parseUrl["scheme"] ?? false)
+            return $url;
+
+        $request = $this->requestStack->getCurrentRequest();
+        $baseDir = $request ? $request->getBasePath() : $_SERVER["CONTEXT_PREFIX"] ?? "";
+
+        $path = trim($parseUrl["path"]);
+        if($path == "/") return $baseDir;
+        else if(!str_starts_with($path, "/"))
+            $path = $baseDir."/".$path;
+
+        return $path;
+    }
+
     public function onKernelRequest(RequestEvent $event)
     {
         if (!$this->enable) return;
         if (!$this->websiteId) return;
 
         $locale = substr($event->getRequest()->getLocale(),0,2);
-        $javascript = '<script type="text/javascript">'.
-                           'window.$crisp = [];'.
-                           'window.CRISP_RUNTIME_CONFIG = {locale : "'.$locale.'"};'.
-                           'window.CRISP_WEBSITE_ID = "'.$this->websiteId.'";'.
-                           '(function () {'.
-                               'd = document;'.
-                               's = d.createElement("script");'.
-                               's.src = "https://client.crisp.chat/l.js";'.
-                               's.async = 1;'.
-                               'd.getElementsByTagName("head")[0].appendChild(s);'.
-                           '})();'.
-                       '</script>';
+        $javascript = '<script id="crisp-script" data-locale="'.$locale.'" data-website-id="'.$this->websiteId.'" src="'.$this->getAsset("bundles/crisp/crisp.js").'"></script>';
 
         $this->twig->addGlobal("crisp", $this->twig->getGlobals()["crisp"] ?? "" . $javascript);
     }
