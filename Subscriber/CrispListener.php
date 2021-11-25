@@ -28,10 +28,12 @@ class CrispListener
         $this->websiteId = $parameterBag->get("crisp.website_id");
     }
 
-    private function allowRender(ResponseEvent $event)
+    private function allowRender(ResponseEvent $event): bool
     {
-        if (!$this->websiteId) return;
+        if ($this->isProfiler ($event)) return false;
+        if ($this->isEasyAdmin($event)) return false;
 
+        if (!$this->websiteId) return false;
         if (!$this->autoAppend)
             return false;
         
@@ -43,6 +45,27 @@ class CrispListener
             return false;
         
         return true;
+    }
+
+    public function isProfiler($event)
+    {
+        $route = $event->getRequest()->get('_route');
+        return $route == "_wdt" || $route == "_profiler";
+    }
+
+    public function isEasyAdmin($event)
+    {
+        $controllerAttribute = $event->getRequest()->attributes->get("_controller");
+        $array = is_array($controllerAttribute) ? $controllerAttribute : explode("::", $event->getRequest()->attributes->get("_controller"));
+        $controller = explode("::", $array[0])[0];
+
+        $parents = [];
+        $parent = $controller;
+        while(( $parent = get_parent_class($parent) )) 
+            $parents[] = $parent;
+        
+        $eaParents = array_filter($parents, fn($c) => str_starts_with($c, "EasyCorp\Bundle\EasyAdminBundle"));
+        return !empty($eaParents);
     }
 
     public function getAsset(string $url): string
@@ -67,6 +90,11 @@ class CrispListener
     {
         if (!$this->enable) return;
         if (!$this->websiteId) return;
+
+        if (!$event->isMainRequest()) return false;
+
+        if ($this->isProfiler ($event)) return false;
+        if ($this->isEasyAdmin($event)) return false;
 
         $locale = substr($event->getRequest()->getLocale(),0,2);
         $javascript = '<script id="crisp-script" data-locale="'.$locale.'" data-website-id="'.$this->websiteId.'" src="'.$this->getAsset("bundles/crisp/crisp.js").'"></script>';
