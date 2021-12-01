@@ -12,7 +12,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $this->treeBuilder = new TreeBuilder('crisp');
 
@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
     }
 
     private $treeBuilder;
-    public function getTreeBuilder() { return $this->treeBuilder; }
+    public function getTreeBuilder() : TreeBuilder { return $this->treeBuilder; }
 
     private function addGlobalOptionsSection(ArrayNodeDefinition $rootNode)
     {
