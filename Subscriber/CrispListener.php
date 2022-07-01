@@ -30,9 +30,6 @@ class CrispListener
 
     private function allowRender(ResponseEvent $event): bool
     {
-        if ($this->isProfiler ($event)) return false;
-        if ($this->isEasyAdmin($event)) return false;
-
         if (!$this->websiteId) return false;
         if (!$this->autoAppend)
             return false;
@@ -43,14 +40,17 @@ class CrispListener
     
         if (!$event->isMainRequest())
             return false;
-        
-        return true;
+
+        if ($this->isEasyAdmin($event))
+            return false;
+    
+        return !$this->isProfiler($event);
     }
 
     public function isProfiler($event)
     {
         $route = $event->getRequest()->get('_route');
-        return $route == "_wdt" || $route == "_profiler";
+        return str_starts_with($route, "_wdt") || str_starts_with($route, "_profiler");
     }
 
     public function isEasyAdmin($event)
