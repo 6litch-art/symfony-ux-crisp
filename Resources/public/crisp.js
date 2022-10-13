@@ -16,9 +16,9 @@ window.addEventListener("load", function()
     this.localStorage.setItem("crisp-client/token/"+CRISP_WEBSITE_ID, CRISP_TOKEN_ID);
 
     if(typeof $crisp != "undefined")
-        $crisp.do("session:reset");
+        $crisp.push(["do", "session:reset", [false]]);
 
-    $crisp = [];
+    window.$crisp = [];
     
     (function () {
         d = document;
