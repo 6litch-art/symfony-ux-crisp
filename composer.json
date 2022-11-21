@@ -4,11 +4,11 @@
     "description": "Crisp integration for Symfony",
     "keywords": ["symfony", "ux", "crisp"],
     "homepage": "https://symfony.com",
-    "license": "GPL",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Marco Meyer",
-            "email": "marco.meyerconde@gmail.com"
+            "email": "marco.meyer@glitchr.io"
         }
     ],
     "autoload": {
