@@ -16,10 +16,34 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class CrispListener
 {
+<<<<<<< HEAD
     /**
      * @var Environment
      */
     private $twig;
+=======
+    /** @var bool */
+    protected ?bool $enable;
+    /** @var bool */
+    protected ?bool $autoAppend;
+    /** @var string */
+    protected ?string $websiteId;
+
+    /**
+     * @var Environment
+     */
+    protected $twig;
+
+    /**
+     * @var ParameterBagInterface
+     */
+    protected $parameterBag;
+
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+>>>>>>> 6732ed802764ad72b822126f8655df9aaee6a1c3
 
     /**
      * @var RequestStack
