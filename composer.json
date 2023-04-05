@@ -1,5 +1,5 @@
 {
-    "name": "glitchr/ux-crisp",
+    "name": "crisp/crisp-bundle",
     "type": "symfony-bundle",
     "description": "Crisp integration for Symfony",
     "keywords": ["symfony", "ux", "crisp"],
