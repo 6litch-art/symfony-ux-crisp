@@ -13,12 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Crisp\\Bundle": "."
+            "Crisp\\Bundle\\": "."
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Crisp\\Bundle": "./Tests"
+            "Tests\\Crisp\\Bundle\\": "./Tests"
         }
     },
     "require": {
