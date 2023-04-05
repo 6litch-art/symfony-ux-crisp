@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\UX\Crisp\Twig;
+namespace Crisp\Bundle\Twig;
 
 use Twig\Extension\AbstractExtension;
 

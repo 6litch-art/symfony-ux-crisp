@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\UX\Crisp;
+namespace Crisp\Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

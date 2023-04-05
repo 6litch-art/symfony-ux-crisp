@@ -8,12 +8,12 @@
         <defaults public="false" />
 
         <!-- Twig extension declarations -->
-        <service id="crisp.twig_extension" class="Symfony\UX\Crisp\Twig\CrispTwigExtension">
+        <service id="crisp.twig_extension" class="Crisp\Bundle\Twig\CrispTwigExtension">
             <tag name="twig.extension" />
         </service>
 
         <!-- Litener declarations -->
-        <service id="crisp.listener" class="Symfony\UX\Crisp\Subscriber\CrispListener">
+        <service id="crisp.listener" class="Crisp\Bundle\Subscriber\CrispListener">
             <tag name="kernel.event_listener" event="kernel.request"  method="onKernelRequest" />
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
             <argument type="service" id="parameter_bag" />

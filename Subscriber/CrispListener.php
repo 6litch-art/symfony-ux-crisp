@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\UX\Crisp\Subscriber;
+namespace Crisp\Bundle\Subscriber;
 
 use \Symfony\Component\HttpKernel\Event\RequestEvent;
 use \Symfony\Component\HttpFoundation\Response;

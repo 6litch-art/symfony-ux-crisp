@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\UX\Crisp\DependencyInjection;
+namespace Crisp\Bundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
