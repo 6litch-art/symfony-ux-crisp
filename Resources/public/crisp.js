@@ -10,11 +10,10 @@ window.addEventListener("load", function()
 
     window.CRISP_RUNTIME_CONFIG = {session_merge : true, locale : crispData.locale};
     window.CRISP_WEBSITE_ID = crispData.websiteId;
+ 
     window.CRISP_TOKEN_ID = crispData.userId || this.localStorage.getItem("crisp-client/token/"+window.CRISP_WEBSITE_ID);
     if(window.CRISP_TOKEN_ID == null) window.CRISP_TOKEN_ID = uniqid("", true);
-
-    this.localStorage.setItem("crisp-client/token/"+window.CRISP_WEBSITE_ID, window.CRISP_TOKEN_ID);
-
+    if(window.CRISP_TOKEN_ID != null) this.localStorage.setItem("crisp-client/token/"+window.CRISP_WEBSITE_ID, window.CRISP_TOKEN_ID);
     if(typeof $crisp != "undefined")
         $crisp.push(["do", "session:reset", [false]]);
 
