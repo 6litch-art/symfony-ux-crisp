@@ -64,7 +64,7 @@ class CrispListener
         if ($this->isEasyAdmin($event))
             return false;
     
-        return !$this->isProfiler($event);
+        return !$this->isProfiler($event) && $event->getResponse()->getStatusCode() == 200;
     }
 
     public function isProfiler($event)
