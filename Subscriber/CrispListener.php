@@ -3,16 +3,11 @@
 namespace Crisp\Bundle\Subscriber;
 
 use \Symfony\Component\HttpKernel\Event\RequestEvent;
-use \Symfony\Component\HttpFoundation\Response;
 
 use Twig\Environment;
-use Base\Service\BaseService;
-use EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 class CrispListener
 {
