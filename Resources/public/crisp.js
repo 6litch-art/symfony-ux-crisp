@@ -1,4 +1,4 @@
-window.addEventListener("load", function()
+var bootCrisp = function()
 {
     function uniqid(prefix = "", random = false) {
         const sec = Date.now() * 1000 + Math.random() * 1000;
@@ -25,4 +25,6 @@ window.addEventListener("load", function()
         s.async = 1;
         d.getElementsByTagName("head")[0].appendChild(s);
     })(); 
-});
+};
+
+window.addEventListener("load", bootCrisp, {"once": true});
