@@ -71,7 +71,9 @@ class CrispListener
     public function isEasyAdmin($event)
     {
         $controllerAttribute = $event->getRequest()->attributes->get("_controller");
-        $array = is_array($controllerAttribute) ? $controllerAttribute : explode("::", $event->getRequest()->attributes->get("_controller"));
+        if($controllerAttribute === null) return false;
+        
+        $array = is_array($controllerAttribute) ? $controllerAttribute : explode("::", $controllerAttribute);
         $controller = explode("::", $array[0])[0];
 
         $parents = [];
