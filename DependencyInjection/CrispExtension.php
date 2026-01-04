@@ -3,7 +3,7 @@
 namespace Crisp\Bundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\Config\Definition\Processor;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,8 +14,8 @@ class CrispExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         // Format XML
-        $loader = new XmlFileLoader($container, new FileLocator(\dirname(__DIR__, 1).'/Resources/config'));
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__, 1).'/Resources/config'));
+        $loader->load('services.php');
 
         $processor = new Processor();
         $configuration = new Configuration();
